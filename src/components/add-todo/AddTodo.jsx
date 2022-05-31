@@ -1,14 +1,25 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./add-todo.scss";
 
-const AddTodo = () => {
+const AddTodo = ({ todo, setTodo, handleAddTodo, elementInput }) => {
   return (
     <div className="add-todo">
       <div className="add-todo_input">
-        <input type="text" placeholder="Add a task here..." />
+        <input
+          type="text"
+          value={todo.title}
+          onChange={(e) => setTodo(prev => ({
+            ...prev,
+            title: e.target.value
+          }))}
+          placeholder="Add a task here..."
+          ref={elementInput}
+        />
       </div>
-      <div className="add-todo_btn">
-        <i class="fa-solid fa-plus"></i>
+      <div className="add-todo_btn" onClick={handleAddTodo}>
+        <FontAwesomeIcon icon={faPlus} />
       </div>
     </div>
   );

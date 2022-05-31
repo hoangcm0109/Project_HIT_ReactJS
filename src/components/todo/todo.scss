@@ -1,0 +1,36 @@
+.todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    font-size: 24px;
+    background-color: #d9e9ff;
+    margin-bottom: 15px;
+    border-radius: 5px;
+
+    &_title {
+        color: #417ac7;
+    }
+
+    &_icon {
+        display: flex;
+        cursor: pointer;
+
+        &-checked {
+            margin-right: 10px;
+        }
+
+        &-checked, &-clear {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #417ac7;
+            background-color: #ffffff;
+        }
+    }
+}
