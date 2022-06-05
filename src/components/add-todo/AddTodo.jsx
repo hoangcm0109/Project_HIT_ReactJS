@@ -6,7 +6,7 @@ import "./add-todo.scss";
 const AddTodo = ({ todo, setTodo, handleAddTodo, elementInput }) => {
   return (
     <div className="add-todo">
-      <div className="add-todo_input">
+      <div className="add-todo_input" onKeyUp={(e) => handleAddTodo(e)}>
         <input
           type="text"
           value={todo.title}

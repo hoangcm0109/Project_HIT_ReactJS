@@ -26,21 +26,47 @@ const Home = () => {
   const [listTodo, setListTodo] = useState([]);
   const elementInput = useRef(null);
 
-  const handleAddTodo = () => {
-    const arr = [...listTodo];
-    arr.push(todo);
-    setListTodo(arr);
-    setTodo({
-      title: "",
-      completed: false,
-    });
-    elementInput.current.focus()
+  const handleAddTodo = (e) => {
+    if (e.keyCode === 13) {
+      const arr = [...listTodo];
+      arr.push(todo);
+      setListTodo(arr);
+      setTodo({
+        title: "",
+        completed: false,
+      });
+      elementInput.current.focus();
+    }
+    // const arr = [...listTodo];
+    // arr.push(todo);
+    // setListTodo(arr);
+    // setTodo({
+    //   title: "",
+    //   completed: false,
+    // });
+    // elementInput.current.focus();
   };
 
   const handleDeleteTodo = (idx) => {
-    const arrUpdate = [...listTodo]
-    arrUpdate.splice(idx, 1)
+    const arrUpdate = [...listTodo];
+    arrUpdate.splice(idx, 1);
+    setListTodo(arrUpdate);
+  };
+
+  const handleChangeStatusTodo = (id) => {
+    const arrUpdate = [...listTodo];
+    arrUpdate.length > 0 && arrUpdate.map((item, idx) => {
+      if (idx === id) {
+        return item.completed =  !item.completed
+      }
+      return item
+    })
     setListTodo(arrUpdate)
+  }
+
+  const handleDeleteAllChecked = () => {
+    const listUpdateFilter = listTodo.filter(item => item.completed === false)
+    setListTodo(listUpdateFilter)
   }
 
   return (
@@ -55,7 +81,26 @@ const Home = () => {
         />
         <div className="modal-todo_list">
           {listTodo.length > 0 &&
-            listTodo.map((item, index) => <Todo key={index} id={index} todoItem={item} handleDeleteTodo={handleDeleteTodo} />)}
+            listTodo.map((item, index) => (
+              <Todo
+                key={index}
+                id={index}
+                todoItem={item}
+                handleDeleteTodo={handleDeleteTodo}
+                handleChangeStatusTodo={handleChangeStatusTodo}
+              />
+            ))}
+        </div>
+        <div className="modal-todo_btn">
+          <button className="modal-todo_btn-filter">
+              Filter Checked
+          </button>
+          <button className="modal-todo_btn-filter">
+              Filter Not Checked
+          </button>
+          <button className="modal-todo_btn-filter" onClick={handleDeleteAllChecked}>
+              Delete All Checked
+          </button>
         </div>
       </div>
     </div>

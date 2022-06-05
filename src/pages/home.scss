@@ -15,5 +15,28 @@
 
     &_list {
         margin-top: 20px;
+        height: 500px;
+        overflow-y: auto;
+    }
+
+    &_btn {
+        margin: 20px 0;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+
+        &-filter {
+            padding: 10px 5px;
+            background-color: #3a7bd5;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all .5s ease;
+
+            &:hover {
+                background-color: #1655ac;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            }
+        }
     }
 }
