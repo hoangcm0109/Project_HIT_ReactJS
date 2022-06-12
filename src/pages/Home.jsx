@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import AddTodo from "../components/add-todo/AddTodo";
 import Todo from "../components/todo/Todo";
 import "./home.scss";
+import {Navigate, useNavigate} from 'react-router-dom'
 
 const arrTodo = [
   {
@@ -25,6 +26,8 @@ const Home = () => {
   });
   const [listTodo, setListTodo] = useState([]);
   const elementInput = useRef(null);
+
+  const navigate = useNavigate()
 
   const handleAddTodo = (e) => {
     if (e.keyCode === 13) {
@@ -69,6 +72,16 @@ const Home = () => {
     setListTodo(listUpdateFilter)
   }
 
+  const handleLogoutSystem = () => {
+    localStorage.setItem('isLogin', false)
+    const isLogin = localStorage.getItem('isLogin')
+    if (isLogin === 'false') {
+      localStorage.removeItem('accessToken')
+      navigate('/login')
+      window.history.replaceState({}, "/");
+    }
+  }
+
   return (
     <div className="flex items-center justify-center h-full py-10">
       <div className="modal-todo h-full">
@@ -101,6 +114,7 @@ const Home = () => {
           <button className="modal-todo_btn-filter" onClick={handleDeleteAllChecked}>
               Delete All Checked
           </button>
+          <button onClick={handleLogoutSystem}>Logout</button>
         </div>
       </div>
     </div>

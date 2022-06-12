@@ -1,10 +1,20 @@
 import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Login";
+import react, { Suspense } from 'react'
 
 function App() {
+  const isLogin = localStorage.getItem('isLogin')
   return (
-    <div className="h-screen">
-      <Home />
-    </div>
+    <BrowserRouter>
+      {/* <div className="h-screen">
+        <Home />
+      </div> */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={isLogin ? <Home /> : Navigate('/login')} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
