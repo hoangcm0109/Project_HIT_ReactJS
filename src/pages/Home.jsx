@@ -23,8 +23,11 @@ const Home = () => {
   const [todo, setTodo] = useState({
     title: "",
     completed: false,
+    change: false,
   });
   const [listTodo, setListTodo] = useState([]);
+  const [change, setChange] = useState(true);
+  const [idTodo, setIdTodo] = useState(0);
   const elementInput = useRef(null);
 
   const navigate = useNavigate()
@@ -72,15 +75,37 @@ const Home = () => {
     setListTodo(listUpdateFilter)
   }
 
-  const handleLogoutSystem = () => {
-    localStorage.setItem('isLogin', false)
-    const isLogin = localStorage.getItem('isLogin')
-    if (isLogin === 'false') {
-      localStorage.removeItem('accessToken')
-      navigate('/login')
-      window.history.replaceState({}, "/");
-    }
+  const handleActiveChangeTodo = (id) => {
+    const arrUpdate = [...listTodo];
+    arrUpdate.length > 0 && arrUpdate.map((item, idx) => {
+      if (idx === id) {
+        return item.change =  !item.change
+      }
+      return item
+    })
+    setListTodo(arrUpdate)
   }
+
+  const handleChangeTodo = (e, id) => {
+    const arrUpdate = [...listTodo];
+    arrUpdate.length > 0 && arrUpdate.map((item, idx) => {
+      if (idx === id) {
+        return item.title = e.target.value
+      }
+      return item
+    })
+    setListTodo(arrUpdate)
+  }
+
+  // const handleLogoutSystem = () => {
+  //   localStorage.setItem('isLogin', false)
+  //   const isLogin = localStorage.getItem('isLogin')
+  //   if (isLogin === 'false') {
+  //     localStorage.removeItem('accessToken')
+  //     navigate('/login')
+  //     window.history.replaceState({}, "/");
+  //   }
+  // }
 
   return (
     <div className="flex items-center justify-center h-full py-10">
@@ -101,6 +126,10 @@ const Home = () => {
                 todoItem={item}
                 handleDeleteTodo={handleDeleteTodo}
                 handleChangeStatusTodo={handleChangeStatusTodo}
+                handleActiveChangeTodo={handleActiveChangeTodo}
+                handleChangeTodo={handleChangeTodo}
+                change={change}
+                activeIdTodo={idTodo}
               />
             ))}
         </div>
@@ -114,7 +143,7 @@ const Home = () => {
           <button className="modal-todo_btn-filter" onClick={handleDeleteAllChecked}>
               Delete All Checked
           </button>
-          <button onClick={handleLogoutSystem}>Logout</button>
+          {/* <button onClick={handleLogoutSystem}>Logout</button> */}
         </div>
       </div>
     </div>

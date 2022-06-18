@@ -7,13 +7,13 @@ function App() {
   const isLogin = localStorage.getItem('isLogin')
   return (
     <BrowserRouter>
-      {/* <div className="h-screen">
+      <div className="h-screen">
         <Home />
-      </div> */}
-      <Routes>
+      </div>
+      {/* <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={isLogin ? <Home /> : Navigate('/login')} />
-      </Routes>
+        <Route path="/home" element={<Home />}/>
+      </Routes> */}
     </BrowserRouter>
   );
 }

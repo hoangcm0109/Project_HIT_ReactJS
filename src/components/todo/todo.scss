@@ -10,6 +10,8 @@
 
     &_title {
         color: #417ac7;
+        width: 100%;
+        background-color: #d9e9ff;
     }
 
     &_icon {
@@ -19,8 +21,12 @@
         &-checked {
             margin-right: 10px;
         }
+        
+        &-change {
+            margin-right: 10px;
+        }
 
-        &-checked, &-clear {
+        &-checked, &-clear, &-change {
             width: 40px;
             height: 40px;
             border-radius: 50%;
